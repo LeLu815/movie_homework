@@ -8,8 +8,10 @@ const renderElem = ({ tagName, attrs, children }) => {
   }
 
   // 가상의 자식들도 실제 돔으로 요소까지 넣어주기
-  for (const child of children) {
-    $el.appendChild(render(child));
+  if (children) {
+    for (const child of children) {
+      $el.appendChild(render(child));
+    }
   }
 
   return $el;
