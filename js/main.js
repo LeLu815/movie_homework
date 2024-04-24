@@ -25,6 +25,9 @@ const vApp = createVApp(count);
 const $app = render(vApp);
 let $rootEl = mount($app, document.getElementById("app"));
 
+const vNewApp = createVApp(2);
+console.log("diff 인수 :", vApp, vNewApp);
+diff(vApp, vNewApp);
 // setInterval(() => {
 //   const n = Math.floor(Math.random() * 10);
 //   const vNewApp = createVApp(n);
