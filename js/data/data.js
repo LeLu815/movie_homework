@@ -34,7 +34,7 @@ export const getData = async (url, loadingId = "loader") => {
 
 export const getImage = async (imgUrl, size) => {
   try {
-    const imageUrl = await fetch(`${urlAddress.image}/w${size}/${imgUrl}`);
+    const imageUrl = await fetch(`${urlAddress.image}/${size}${imgUrl}`);
     console.log(imageUrl);
   } catch (error) {
     return error;
