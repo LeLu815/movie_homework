@@ -10,9 +10,17 @@ import { getData, getImage, urlAddress } from "./data/data.js";
   const dataList = await getData(urlAddress.popular);
   const childrenDataList = [];
 
+  console.log("dataList :", dataList);
+
   // 받아온 데이터의 자식들을 가상돔 형식으로 배열에 담는다.
   for (let i = 0; i < dataList.results.length; i++) {
-    const imgUrl = await getImage(dataList.results[i].poster_path, "original");
+    // const response = await getImage(
+    //   dataList.results[i].poster_path,
+    //   "original"
+    // );
+    // const imgUrl = await response.json();
+    // console.log(response);
+
     const newChild = createElement("div", {
       attrs: {
         id: dataList.results[i].id,
@@ -21,7 +29,7 @@ import { getData, getImage, urlAddress } from "./data/data.js";
       children: [
         createElement("img", {
           attrs: {
-            src: imgUrl,
+            src: `https://image.tmdb.org/t/p/original/${dataList.results[i].poster_path}`,
             class: "content_v_item_img",
           },
         }),
@@ -33,9 +41,23 @@ import { getData, getImage, urlAddress } from "./data/data.js";
         }),
         createElement("div", {
           attrs: {
-            class: "rating",
+            class: "span",
           },
-          children: [`⭐️ ${dataList.results[i].vote_average.toFixed(1)}`],
+          // children: [`⭐️ ${dataList.results[i].vote_average.toFixed(1)} 👍 ${dataList.results[i].vote_count}`],
+          children: [
+            createElement("span", {
+              attrs: {
+                class: "span_rating",
+              },
+              children: [`⭐️ ${dataList.results[i].vote_average.toFixed(1)}`],
+            }),
+            createElement("span", {
+              attrs: {
+                class: "span_vote",
+              },
+              children: [`👍 ${dataList.results[i].vote_count}`],
+            }),
+          ],
         }),
       ],
     });
