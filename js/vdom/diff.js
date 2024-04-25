@@ -1,4 +1,5 @@
 import render from "./render.js";
+import editDiffChildren from "./diffChildren.js";
 
 const zip = (xs, ys) => {
   const zipped = [];
@@ -38,43 +39,37 @@ const diffAttrs = (oldAttrs, newAttrs) => {
 };
 
 // children은 배열로 들어온다.
-// 만약에 children이 없다면?
+// 에러 : Uncaught TypeError: Cannot read properties of undefined (reading 'forEach')
 const diffChildren = (oldVChildren, newVChildren) => {
-  const childPatches = [];
-  const additionalPatches = [];
+  return editDiffChildren(oldVChildren, newVChildren);
+  // const childPatches = [];
+  // const additionalPatches = [];
 
-  // 기존 것만큼만 돈다. 기존것과 새로운 것 비교.
-  // 에러 : Uncaught TypeError: Cannot read properties of undefined (reading 'forEach')
-  // 배열이 아니라 객체 전체가 들어왔다..
-  console.log(
-    "diffChildren 인수 차례로: oldVChildren, newVChildren",
-    oldVChildren,
-    newVChildren
-  );
+  // // 기존 것만큼만 돈다. 기존것과 새로운 것 비교.
 
-  oldVChildren.forEach((oldVChild, i) => {
-    childPatches.push(diff(oldVChild, newVChildren[i]));
-  });
+  // oldVChildren.forEach((oldVChild, i) => {
+  //   childPatches.push(diff(oldVChild, newVChildren[i]));
+  // });
 
-  // 배열 메서드 slice, (시작, 끝 인덱스 미포함) 얕은 복사로 새로운 배열을 생성하여 준다. 인수가 하나면 시작 인덱스부터 끝까지
-  // 위에서는 비교를 위해 과거 인덱스 수도 돌리고 새 인덱스가 길다면 이후 새 인덱스 안돌린 것부터 시작!
-  for (const additionalVChild of newVChildren.slice(oldVChildren.length)) {
-    additionalPatches.push(($node) => {
-      $node.appendChild(render(additionalVChild));
-      return $node;
-    });
-  }
+  // // 배열 메서드 slice, (시작, 끝 인덱스 미포함) 얕은 복사로 새로운 배열을 생성하여 준다. 인수가 하나면 시작 인덱스부터 끝까지
+  // // 위에서는 비교를 위해 과거 인덱스 수도 돌리고 새 인덱스가 길다면 이후 새 인덱스 안돌린 것부터 시작!
+  // for (const additionalVChild of newVChildren.slice(oldVChildren.length)) {
+  //   additionalPatches.push(($node) => {
+  //     $node.appendChild(render(additionalVChild));
+  //     return $node;
+  //   });
+  // }
 
-  return ($parent) => {
-    for (const [patch, $child] of zip(childPatches, $parent.childNodes)) {
-      patch($child);
-    }
+  // return ($parent) => {
+  //   for (const [patch, $child] of zip(childPatches, $parent.childNodes)) {
+  //     patch($child);
+  //   }
 
-    for (const patch of additionalPatches) {
-      patch($parent);
-    }
-    return $parent;
-  };
+  //   for (const patch of additionalPatches) {
+  //     patch($parent);
+  //   }
+  //   return $parent;
+  // };
 };
 
 // Diffing Algorithm
@@ -112,22 +107,20 @@ const diff = (oldVTree, newVTree) => {
   }
 
   // 다른 태그가 아닌거야! => 비교 시작!!!
-
-  // 여기서 테스트!
-  console.log(
-    "diff :",
-    oldVTree,
-    newVTree,
-    oldVTree.children,
-    newVTree.children
-  );
-
   const patchAttrs = diffAttrs(oldVTree.attrs, newVTree.attrs);
-  const patchChildren = diffChildren(oldVTree.children, newVTree.children);
+  // children이 undifined인 경우 방지용!
+  if (newVTree.children) {
+    const patchChildren = diffChildren(oldVTree.children, newVTree.children);
+
+    return ($node) => {
+      patchAttrs($node);
+      patchChildren($node);
+      return $node;
+    };
+  }
 
   return ($node) => {
     patchAttrs($node);
-    patchChildren($node);
     return $node;
   };
 };

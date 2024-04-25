@@ -7,27 +7,25 @@ const createVApp = (count) =>
   createElement("div", {
     attrs: {
       id: "app",
-      dataCount: count, // we use the count here
+      key: `${Math.random()}`,
+      dataCount: count,
     },
     children: [
       "The current count is: ",
-      String(count), // and here
+      String(count),
       createElement("img", {
         attrs: {
           src: "https://media.giphy.com/media/cuPm4p4pClZVC/giphy.gif",
+          key: `${Math.random()}`,
         },
       }),
     ],
   });
 
-let count = 0;
-const vApp = createVApp(count);
+let vApp = createVApp(0);
 const $app = render(vApp);
 let $rootEl = mount($app, document.getElementById("app"));
 
-const vNewApp = createVApp(2);
-console.log("diff 인수 :", vApp, vNewApp);
-diff(vApp, vNewApp);
 // setInterval(() => {
 //   const n = Math.floor(Math.random() * 10);
 //   const vNewApp = createVApp(n);
