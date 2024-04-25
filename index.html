@@ -4,10 +4,102 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lobster&family=Silkscreen:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="./css/reset.css" />
+    <link rel="stylesheet" href="./css/main.css" />
   </head>
   <body>
-    <div id="app"></div>
-    <!-- <script src="./js/test.js" type="module"></script> -->
+    <div id="container" class="container">
+      <div class="ad_top">
+        <img
+          src="https://adimg.cgv.co.kr/images/202404/designer/0419_980x80.jpg"
+        />
+      </div>
+      <div class="info_top">
+        <div class="logo">
+          <div class="big">SPARTA</div>
+          <div class="small">movieclub</div>
+        </div>
+        <div class="sub_info">
+          <div class="button">
+            <img
+              class="info_img"
+              src="https://img.cgv.co.kr/R2014/images/common/ico/loginPassword.png"
+            />
+            <span>로그인</span>
+          </div>
+          <div class="button">
+            <img
+              class="info_img"
+              src="https://img.cgv.co.kr/R2014/images/common/ico/loginJoin.png"
+            />
+            <span>회원가입</span>
+          </div>
+          <div class="button">
+            <img
+              class="info_img"
+              src="https://img.cgv.co.kr/R2014/images/common/ico/loginMember.png"
+            />
+            <span>MY SPARTA</span>
+          </div>
+          <div class="button">
+            <img
+              class="info_img"
+              src="https://img.cgv.co.kr/R2014/images/common/ico/loginCustomer.png"
+            />
+            <span>고객센터</span>
+          </div>
+        </div>
+      </div>
+      <div class="nav_container">
+        <div class="section">
+          <div class="nav">
+            <div>영화</div>
+            <div>극장</div>
+            <div>예매</div>
+            <div>스토어</div>
+            <div>이벤트</div>
+            <div>혜택</div>
+          </div>
+          <div class="search" id="search">
+            <input id="input" />
+            <img
+              id="search_icon"
+              src="https://img.cgv.co.kr/R2014/images/common/ico/search.png"
+            />
+          </div>
+        </div>
+      </div>
+      <div class="ad_main"></div>
+      <div class="content">
+        <div class="content_nav">
+          <div class="controller">
+            <div class="big">무비차트</div>
+            <div class="small">|</div>
+            <div class="hover" id="playing">Playing</div>
+            <div class="hover" id="popular">Popular</div>
+            <div class="hover" id="top">Top</div>
+            <div class="hover" id="upcoming">Upcoming</div>
+          </div>
+          <div class="whole">
+            <div>전체보기</div>
+            <img
+              class="whole_img"
+              src="https://img.cgv.co.kr/R2014/images/common/ico/arrowR_8x13.png"
+            />
+          </div>
+        </div>
+        <div class="content_body" id="app"></div>
+      </div>
+    </div>
+
+    <script src="./js/test.js" type="module"></script>
     <script src="./js/main.js" type="module"></script>
   </body>
 </html>
