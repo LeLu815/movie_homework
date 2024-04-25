@@ -3,6 +3,8 @@ import render from "./vdom/render.js";
 import mount from "./vdom/mount.js";
 import diff from "./vdom/diff.js";
 
+import { getData, getImage, urlAddress } from "./data/data.js";
+
 const createVApp = (count) =>
   createElement("div", {
     attrs: {
@@ -25,6 +27,15 @@ const createVApp = (count) =>
 let vApp = createVApp(0);
 const $app = render(vApp);
 let $rootEl = mount($app, document.getElementById("app"));
+
+(async () => {
+  const dataList = await getData(urlAddress.popular);
+  const singleImage = await getImage(dataList.results[0].poster_path, 500);
+  console.log(singleImage);
+})();
+
+const dataList = getData(urlAddress.popular);
+// const singleImage = getImage(dataList.results, 500);
 
 // setInterval(() => {
 //   const n = Math.floor(Math.random() * 10);
