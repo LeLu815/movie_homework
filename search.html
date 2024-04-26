@@ -43,7 +43,7 @@
         />
       </div>
       <div class="info_top">
-        <div class="logo" onClick="location.href='./index.html'">
+        <div class="logo" id="logo" onClick="location.href='./index.html'">
           <div class="big">SPARTA</div>
           <div class="small">movieclub</div>
         </div>
@@ -99,7 +99,18 @@
           </div>
         </div>
       </div>
-      <div class="ad_main">
+      <div class="search_result_count">
+        <div>영화검색 결과</div>
+        <div>
+          <span class="bold" id="search_count_span">0</span>
+          <span class="bold">건</span>
+        </div>
+      </div>
+      <div class="content_body">
+        <div id="loader" class="loader"></div>
+        <div id="app"></div>
+      </div>
+      <!-- <div class="ad_main">
         <img
           style="height: 500px"
           src="https://static.spartacodingclub.kr/nbcamp/landing/controlled-by-backoffice/carousel/hub_hero_review.webp"
@@ -127,7 +138,7 @@
           <div id="loader" class="loader"></div>
           <div id="app"></div>
         </div>
-      </div>
+      </div> -->
     </div>
     <div class="bottom"></div>
     <div class="bottom_info">
@@ -147,10 +158,9 @@
       </di>
       <div class="end">(우주최강 B13 리액트 5기) 스파르타 코딩클럽 항해 99</div>
     </div>
-
     <script src="./js/scroll.js"></script>
-    <script src="./js/data/data.js" type="module"></script>
-    <script src="./js/main.js" type="module"></script>
-    <script src="./js/data/search_index.js" type="module"></script>
+    <script src="./js/data/saerch.js" type="module"></script>
+    <!-- <script src="./js/data/data.js" type="module"></script>
+    <script src="./js/main.js" type="module"></script> -->
   </body>
 </html>

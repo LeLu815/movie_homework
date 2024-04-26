@@ -85,6 +85,7 @@
   display: flex;
   justify-content: center;
   align-items: end;
+  cursor: pointer;
 }
 .logo .big {
   color: red;
@@ -162,6 +163,7 @@
 .search img {
   width: 26px;
   height: 26px;
+  cursor: pointer;
 }
 
 .ad_main {
@@ -170,9 +172,6 @@
   overflow: hidden;
   display: flex;
   justify-content: center;
-}
-
-.content {
 }
 
 .content_nav {
@@ -195,10 +194,17 @@
   font-weight: 700;
   color: #222;
 }
+.controller_selected {
+  font-weight: 700;
+  color: #222;
+}
 .content_nav .controller .small {
   font-weight: 100;
   color: #999;
   font-size: 15px;
+}
+.content_nav .controller .hover {
+  text-align: center;
 }
 .whole {
   display: flex;
@@ -318,4 +324,20 @@
   color: #666;
   line-height: 1.667em;
   margin: 15px auto 0 auto;
+}
+
+.search_result_count {
+  max-width: 1040px;
+  height: 40px;
+  margin: 0 auto 0 auto;
+  display: flex;
+  font-weight: 400;
+  font-size: 20px;
+  color: #222;
+  gap: 15px;
+  align-items: center;
+  padding-top: 30px;
+}
+.search_result_count .bold {
+  font-weight: 700;
 }

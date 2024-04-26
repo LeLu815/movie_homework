@@ -10,12 +10,28 @@ const options = {
 // encodeURIComponent
 export const urlAddress = {
   langUrl: "https://api.themoviedb.org/3/configuration/languages",
+  playing: "https://api.themoviedb.org/3/movie/now_playing?language=ko&page=2",
   popular: "https://api.themoviedb.org/3/movie/popular?language=ko&page=1",
-  image: "https://image.tmdb.org/t/p",
+  top: "https://api.themoviedb.org/3/movie/top_rated?language=ko&page=3",
+  upcoming: "https://api.themoviedb.org/3/movie/upcoming?language=ko&page=4",
 };
 
 export const changeKorToUrl = (korString) => {
   return encodeURIComponent(korString);
+};
+
+export const searchData = async (keyword) => {
+  const urlString = changeKorToUrl(keyword);
+  try {
+    const response = await fetch(
+      `https://api.themoviedb.org/3/search/movie?query=${urlString}&include_adult=false&language=ko&page=1`,
+      options
+    );
+    const data = await response.json(response);
+    return data;
+  } catch (error) {
+    return error;
+  }
 };
 
 export const getData = async (url, loadingId = "loader") => {

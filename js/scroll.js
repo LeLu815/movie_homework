@@ -3,8 +3,6 @@ window.addEventListener("scroll", function () {
   const content = document.getElementById("nav_container");
   const contentRect = content.getBoundingClientRect();
 
-  console.log(nav);
-
   if (contentRect.top < window.innerHeight && contentRect.bottom > 0) {
     // content가 화면 안에 있을 때
     nav.style.visibility = "hidden"; // nav를 화면 상단에 고정
