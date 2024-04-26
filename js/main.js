@@ -10,17 +10,8 @@ import { getData, getImage, urlAddress } from "./data/data.js";
   const dataList = await getData(urlAddress.popular);
   const childrenDataList = [];
 
-  console.log("dataList :", dataList);
-
   // 받아온 데이터의 자식들을 가상돔 형식으로 배열에 담는다.
   for (let i = 0; i < dataList.results.length; i++) {
-    // const response = await getImage(
-    //   dataList.results[i].poster_path,
-    //   "original"
-    // );
-    // const imgUrl = await response.json();
-    // console.log(response);
-
     const newChild = createElement("div", {
       attrs: {
         id: dataList.results[i].id,
@@ -78,6 +69,21 @@ import { getData, getImage, urlAddress } from "./data/data.js";
   let vApp = createVApp();
   const $app = render(vApp);
   let $rootEl = mount($app, document.getElementById("app"));
+
+  document.getElementById("app").addEventListener("click", (event) => {
+    if (event.target.getAttribute("class") === "content_v_item") {
+      alert(event.target.id);
+    } else {
+      if (
+        event.target.parentElement.getAttribute("class") === "content_v_item"
+      ) {
+        alert(event.target.parentElement.id);
+      } else {
+        const parent = event.target.parentElement;
+        alert(parent.parentElement.id);
+      }
+    }
+  });
 })();
 
 // const createVApp = (count) =>
