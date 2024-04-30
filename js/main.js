@@ -1,97 +1,28 @@
-// import createElement from "./vdom/createElement.js";
-import vdom from "./vdom/vdom.js";
-import render from "./vdom/render.js";
-import mount from "./vdom/mount.js";
-import diff from "./vdom/diff.js";
+import initialRender from "./initialRender.js";
+import { changePage } from "./changePages.js";
+import { scrollNavFunc } from "./scroll.js";
 
-import { getData, urlAddress } from "./data/data.js";
-
+// 최초 랜더링하기
 (async () => {
-  // 먼저 데이터를 받아온다.
-  const dataList = await getData(urlAddress.popular);
-  const childrenDataList = [];
-
-  let vApp = await vdom(dataList, childrenDataList);
-  const $app = render(vApp);
-  let $rootEl = mount($app, document.getElementById("app"));
-
-  document.getElementById("app").addEventListener("click", (event) => {
-    if (event.target.className === "content_v_item") {
-      alert(event.target.id);
-    } else {
-      if (event.target.parentElement.className === "content_v_item") {
-        alert(event.target.parentElement.id);
-      } else {
-        const parent = event.target.parentElement;
-        if (parent.parentElement.className === "content_v_item") {
-          alert(parent.parentElement.id);
-        }
-      }
-    }
-  });
-
-  document
-    .getElementById("controller")
-    .addEventListener("click", async (event) => {
-      const currentId = document.getElementById("controller").dataset.current;
-      let response;
-      let vNewApp;
-      let patch;
-      const childrenDataList = [];
-      switch (event.target.id) {
-        case "playing":
-          response = await getData(urlAddress.playing);
-          console.log(response);
-          vNewApp = await vdom(response, childrenDataList);
-          patch = diff(vApp, vNewApp);
-          $rootEl = patch($rootEl);
-          vApp = vNewApp;
-
-          event.target.className = "hover controller_selected";
-          document.getElementById(currentId).className = "hover";
-          document
-            .getElementById("controller")
-            .setAttribute("data-current", "playing");
-          break;
-        case "popular":
-          response = await getData(urlAddress.popular);
-          vNewApp = await vdom(response, childrenDataList);
-          patch = diff(vApp, vNewApp);
-          $rootEl = patch($rootEl);
-          vApp = vNewApp;
-
-          event.target.className = "hover controller_selected";
-          document.getElementById(currentId).className = "hover";
-          document
-            .getElementById("controller")
-            .setAttribute("data-current", "popular");
-          break;
-        case "top":
-          response = await getData(urlAddress.top);
-          vNewApp = await vdom(response, childrenDataList);
-          patch = diff(vApp, vNewApp);
-          $rootEl = patch($rootEl);
-          vApp = vNewApp;
-
-          event.target.className = "hover controller_selected";
-          document.getElementById(currentId).className = "hover";
-          document
-            .getElementById("controller")
-            .setAttribute("data-current", "top");
-          break;
-        case "upcoming":
-          response = await getData(urlAddress.upcoming);
-          vNewApp = await vdom(response, childrenDataList);
-          patch = diff(vApp, vNewApp);
-          $rootEl = patch($rootEl);
-          vApp = vNewApp;
-
-          event.target.className = "hover controller_selected";
-          document.getElementById(currentId).className = "hover";
-          document
-            .getElementById("controller")
-            .setAttribute("data-current", "upcoming");
-          break;
-      }
-    });
+  await initialRender();
 })();
+
+// 스크롤 이벤트
+scrollNavFunc("top_nav", "nav_container");
+
+// 제출 이벤트 등록
+document.getElementById("searchForm").onsubmit = function (e) {
+  const searchQuery = document.getElementById("searchQuery").value;
+  e.preventDefault();
+  changePage({ page: "search" }, "search", `index.html?query=${searchQuery}`);
+};
+
+document.getElementById("search_icon").addEventListener("click", async () => {
+  const searchQuery = document.getElementById("searchQuery").value;
+  changePage({ page: "search" }, "search", `index.html?query=${searchQuery}`);
+});
+
+// 로고 클릭
+document.getElementById("logo").addEventListener("click", async () => {
+  changePage({ page: "main" }, "main", `index.html`);
+});

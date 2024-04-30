@@ -15,10 +15,7 @@
 
     <link rel="stylesheet" href="./css/reset.css" />
     <link rel="stylesheet" href="./css/main.css" />
-    <script defer src="./js/scroll.js"></script>
-    <script defer src="./js/data/data.js" type="module"></script>
     <script defer src="./js/main.js" type="module"></script>
-    <script defer src="./js/data/search_index.js" type="module"></script>
   </head>
   <body>
     <div id="top_nav" class="top_nav">
@@ -47,7 +44,7 @@
         />
       </div>
       <div class="info_top">
-        <div class="logo" onClick="location.href='./index.html'">
+        <div class="logo" id="logo">
           <div class="big">SPARTA</div>
           <div class="small">movieclub</div>
         </div>
@@ -108,6 +105,13 @@
           style="height: 500px"
           src="https://static.spartacodingclub.kr/nbcamp/landing/controlled-by-backoffice/carousel/hub_hero_review.webp"
         />
+      </div>
+      <div style="display: none" class="search_result_count">
+        <div>영화검색 결과</div>
+        <div>
+          <span class="bold" id="search_count_span">0</span>
+          <span class="bold">건</span>
+        </div>
       </div>
       <div class="content">
         <div class="content_nav">
