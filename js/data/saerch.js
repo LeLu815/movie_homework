@@ -36,16 +36,14 @@ if (query) {
     let $rootEl = mount($app, document.getElementById("app"));
 
     document.getElementById("app").addEventListener("click", (event) => {
-      if (event.target.getAttribute("class") === "content_v_item") {
+      if (event.target.className === "content_v_item") {
         alert(event.target.id);
       } else {
-        if (
-          event.target.parentElement.getAttribute("class") === "content_v_item"
-        ) {
+        if (event.target.parentElement.className === "content_v_item") {
           alert(event.target.parentElement.id);
         } else {
           const parent = event.target.parentElement;
-          if (parent.parentElement.id === "content_v_item") {
+          if (parent.parentElement.className === "content_v_item") {
             alert(parent.parentElement.id);
           }
         }
