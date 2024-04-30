@@ -30,7 +30,7 @@
 ## 튜터님 피드백
 
 - [x] 검색시 평점과 좋아요 부분을 클릭했을 때는 alert 호출
-- [ ] 디바운싱 적용
+- [ ] 스크롤이벤트 디바운싱 적용
 - [ ] 자바스크립트 module 파일 설정은 main.js, 전체 코드실행흐름을 main.js에서 확인할수있게 허브역할
 - [x] event.target.getAttribute("class") 보다 event.target.className 으로 DOM property에 접근
-- [ ] location.href 보다는 pushState
+- [ ] location.href 보다는 pushState를 사용, spa 모방.
